@@ -16,9 +16,6 @@
             android:name=".CreateUserActivity"
             android:exported="false" />
         <activity
-            android:name=".TestActivity"
-            android:exported="false" />
-        <activity
             android:name=".AdminProfileActivity"
             android:exported="false" />
         <activity
