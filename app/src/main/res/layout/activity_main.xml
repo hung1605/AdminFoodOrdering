@@ -192,7 +192,6 @@
         android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="60dp"
-        android:background="@color/cardview_light_background"
         android:outlineSpotShadowColor="@color/textColor"
         app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toStartOf="@+id/cardView6"
@@ -238,12 +237,11 @@
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_marginTop="380dp"
-        android:background="@color/cardview_light_background"
         android:outlineSpotShadowColor="@color/textColor"
         app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cardView5"
+        app:layout_constraintStart_toEndOf="@+id/outForDeliveryButton"
         app:layout_constraintTop_toBottomOf="@+id/cardView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -279,12 +277,11 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView5"
+        android:id="@+id/outForDeliveryButton"
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="60dp"
-        android:background="@color/cardview_light_background"
         android:outlineSpotShadowColor="@color/textColor"
         app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toStartOf="@+id/cardView2"
@@ -328,7 +325,6 @@
         android:id="@+id/cardView7"
         android:layout_width="150dp"
         android:layout_height="100dp"
-        android:background="@color/cardview_light_background"
         android:outlineSpotShadowColor="@color/textColor"
         app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -374,7 +370,6 @@
         android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="60dp"
-        android:background="@color/cardview_light_background"
         android:outlineSpotShadowColor="@color/textColor"
         app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toStartOf="@+id/cardView7"
@@ -383,6 +378,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView3">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/profile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/chargereen">
@@ -419,7 +415,6 @@
         android:id="@+id/cardView6"
         android:layout_width="150dp"
         android:layout_height="100dp"
-        android:background="@color/cardview_light_background"
         android:outlineSpotShadowColor="@color/textColor"
         app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
