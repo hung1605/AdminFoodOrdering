@@ -106,7 +106,7 @@
         android:paddingLeft="15dp"
         android:text="Facebook"
         android:textAllCaps="false"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintEnd_toStartOf="@+id/googleButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
@@ -128,7 +128,7 @@
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button3"
+        android:id="@+id/googleButton"
         android:layout_width="152dp"
         android:layout_height="57dp"
         android:layout_marginTop="16dp"
@@ -160,7 +160,7 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="@font/patrick_hand"
         android:text="Thiết kế bởi\nPTITer"
         android:textAlignment="center"
@@ -169,7 +169,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signTV" />
+        />
 
     <TextView
         android:id="@+id/textView18"

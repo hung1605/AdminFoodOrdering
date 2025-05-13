@@ -32,7 +32,9 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = Firebase.auth
-        database = Firebase.database.reference
+        database = Firebase
+            .database("https://foodordering-b4531-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .reference
 
 
         val locationList = arrayListOf("Hà Nội", "Hồ Chí Minh", "Đà Nẵng", "Cần Thơ", "Hải Phòng")
@@ -68,9 +70,6 @@ class SignUpActivity : AppCompatActivity() {
             if (task.isSuccessful) {
                 Toast.makeText(this, "Tài khoản đã được tạo thành công", Toast.LENGTH_SHORT).show()
                 saveUserData()
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
-                finish()
             } else {
                 Toast.makeText(this, "Tạo tài khoản thất bại", Toast.LENGTH_SHORT).show()
                 Log.d("Account", "tao tai khoan that bai", task.exception)
@@ -79,12 +78,24 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun saveUserData() {
+        Log.d("Account", "save user duoc goi")
         userName = binding.editTextName.text.toString().trim()
         nameOfRestaurant = binding.editTextNameRestaurant.text.toString().trim()
         email = binding.editTextEmailAddress.text.toString().trim()
         password = binding.editTextPassword.text.toString().trim()
         val user = UserModel(userName, nameOfRestaurant, email, password)
         val userId = FirebaseAuth.getInstance().currentUser!!.uid
+        Log.d("Account", "lay id thanh cong")
         database.child("user").child(userId).setValue(user)
+            .addOnSuccessListener {
+                Log.d("Account", "Lưu dữ liệu người dùng thành công!")
+                Toast.makeText(this, "Lưu thông tin thành công!", Toast.LENGTH_LONG).show()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
+            .addOnFailureListener { e ->
+                Log.e("Account", "Lỗi khi lưu dữ liệu người dùng: ${e.message}", e)
+                Toast.makeText(this, "Lỗi khi lưu dữ liệu: ${e.message}", Toast.LENGTH_LONG).show()
+            }
     }
 }
