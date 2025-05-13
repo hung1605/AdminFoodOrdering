@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OutForDeliveryActivity">
+    android:background="@color/white"
+    tools:context=".PendingOrderActivity">
 
     <ImageButton
         android:id="@+id/backButton"
@@ -24,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/patrick_hand"
-        android:text="Sẵn sàng giao hàng"
+        android:text="Chờ giao hàng"
         android:textColor="@color/black"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,17 +33,14 @@
         app:layout_constraintTop_toTopOf="@+id/backButton" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/deliveryRecyclerView"
+        android:id="@+id/pendingOrderRecyclerView"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        tools:listitem="@layout/pending_order_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView19"
-        tools:listitem="@layout/delivery_item">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

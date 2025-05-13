@@ -75,13 +75,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/attantion"
-                app:layout_constraintBottom_toTopOf="@+id/textView8"
-                app:layout_constraintEnd_toEndOf="@+id/textView8"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintBottom_toTopOf="@+id/pendingOrderTextView"
+                app:layout_constraintEnd_toEndOf="@+id/pendingOrderTextView"
+                app:layout_constraintStart_toStartOf="@+id/pendingOrderTextView"
                 app:layout_constraintTop_toTopOf="@id/guideline2" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/pendingOrderTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -103,9 +103,9 @@
 
                 android:textColor="@color/textColor"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@id/textView8"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
-                app:layout_constraintTop_toBottomOf="@id/textView8" />
+                app:layout_constraintEnd_toEndOf="@id/pendingOrderTextView"
+                app:layout_constraintStart_toStartOf="@+id/pendingOrderTextView"
+                app:layout_constraintTop_toBottomOf="@id/pendingOrderTextView" />
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -129,7 +129,7 @@
                 android:textColor="@color/textColor"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView8"
+                app:layout_constraintStart_toEndOf="@+id/pendingOrderTextView"
                 app:layout_constraintTop_toTopOf="@+id/guideline2"
                 tools:ignore="MissingConstraints" />
 
@@ -333,6 +333,7 @@
         app:layout_constraintTop_toTopOf="@+id/cardView4">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/createNewUser"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/chargereen">
