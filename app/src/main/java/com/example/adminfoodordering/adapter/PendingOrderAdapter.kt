@@ -13,8 +13,6 @@ class PendingOrderAdapter(
     private val foodImage: ArrayList<Int>,
     private val context: Context
 ) : RecyclerView.Adapter<PendingOrderAdapter.PendingOrderViewHolder>() {
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PendingOrderViewHolder {
         val binding =
             PendingOrderItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)

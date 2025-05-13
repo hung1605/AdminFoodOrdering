@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato_bold"
-        android:text="Đăng ký tài khoản\nQuản trị viên"
+        android:text="Đăng ký tài khoản\nNhà hàng"
         android:textAlignment="center"
         android:textColor="@color/textColor"
         android:textSize="16sp"
@@ -92,7 +92,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edittextshape"
-        android:drawableLeft="@drawable/user"
+        android:drawableLeft="@drawable/usernew"
         android:drawablePadding="15dp"
         android:elevation="5dp"
         android:ems="10"
@@ -125,7 +125,7 @@
 
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/editTextEmailAddress"
         android:layout_width="325dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
@@ -144,7 +144,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextNameRestaurant" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/editTextPassword"
         android:layout_width="325dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
@@ -158,9 +158,9 @@
         android:inputType="textPassword"
         android:paddingLeft="15dp"
         android:outlineSpotShadowColor="@color/textColor"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        app:layout_constraintEnd_toEndOf="@+id/editTextEmailAddress"
+        app:layout_constraintStart_toStartOf="@+id/editTextEmailAddress"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailAddress" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signUpButton"
@@ -173,21 +173,21 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
+        app:layout_constraintEnd_toEndOf="@+id/editTextPassword"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintStart_toStartOf="@+id/editTextPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
     <TextView
-        android:id="@+id/loginTV"
+        android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/lato"
         android:text="Đăng nhập"
+        android:layout_marginBottom="8dp"
         android:textColor="@color/textColor"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/signUpButton"
         app:layout_constraintStart_toStartOf="@+id/signUpButton"
         app:layout_constraintTop_toBottomOf="@+id/signUpButton" />
@@ -198,12 +198,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/patrick_hand"
-        android:text="Thiết kế bởi\nHoangPhuzzz"
+        android:text="Thiết kế bởi PTITer"
         android:textAlignment="center"
         android:textColor="@color/textColor"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
