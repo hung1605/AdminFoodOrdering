@@ -41,7 +41,7 @@ class AddItemActivity : AppCompatActivity() {
 
         binding.addItemButton.setOnClickListener {
             foodName = binding.enterFoodName.text.toString().trim()
-            foodPrice = binding.enterFoodPrice.text.toString().trim()
+            foodPrice = binding.enterFoodPrice.text.toString().trim() + " VNĐ"
             foodDescription = binding.description.text.toString().trim()
             foodIngredient = binding.ingredient.text.toString().trim()
 

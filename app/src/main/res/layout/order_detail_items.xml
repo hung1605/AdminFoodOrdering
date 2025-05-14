@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -46,58 +45,57 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/customerName"
+                android:id="@+id/foodNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/patrick_hand"
-                android:text="Nguyen Van A"
+                android:text="Ten mon an"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView23"
+                app:layout_constraintBottom_toTopOf="@+id/textView8"
                 app:layout_constraintStart_toEndOf="@+id/cardView9"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/patrick_hand"
-                android:text="Tổng tiền"
+                android:text="Số lượng"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/customerName"
-                app:layout_constraintTop_toBottomOf="@+id/customerName" />
+                app:layout_constraintStart_toStartOf="@+id/foodNameTextView"
+                app:layout_constraintTop_toBottomOf="@+id/foodNameTextView" />
 
             <TextView
-                android:id="@+id/pendingOrderQuantity"
+                android:id="@+id/foodQuantityTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/patrick_hand"
-                android:text="35.000vnđ"
+                android:text="35"
                 android:layout_marginLeft="8dp"
                 android:textColor="@color/textColor"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView23"
-                app:layout_constraintStart_toEndOf="@+id/textView23" />
+                app:layout_constraintBottom_toBottomOf="@+id/textView8"
+                app:layout_constraintStart_toEndOf="@+id/textView8" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/orderAcceptButton"
+            <TextView
+                android:id="@+id/foodPriceTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:text="Chấp nhận"
-                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:text="10.000 vnđ"
+                android:textColor="@color/textColor"
                 android:textAllCaps="false"
                 android:fontFamily="@font/patrick_hand"
                 android:layout_marginRight="32dp"
-                android:background="@drawable/greenbuttonshape"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
