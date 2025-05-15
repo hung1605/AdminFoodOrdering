@@ -3,6 +3,12 @@ package com.example.adminfoodordering
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.adminfoodordering.databinding.ActivityAdminProfileBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class AdminProfileActivity : AppCompatActivity() {
 
@@ -10,22 +16,32 @@ class AdminProfileActivity : AppCompatActivity() {
         ActivityAdminProfileBinding.inflate(layoutInflater)
     }
 
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: FirebaseDatabase
+    private lateinit var adminReference: DatabaseReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.backButton.setOnClickListener {
-            finish()
-        }
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+        adminReference = database.getReference("user")
+
+        binding.backButton.setOnClickListener { finish() }
 
         binding.name.isEnabled = false
         binding.address.isEnabled = false
         binding.email.isEnabled = false
         binding.phone.isEnabled = false
         binding.password.isEnabled = false
+        binding.saveButton.isEnabled = false
+        binding.saveButton.setOnClickListener {
+            updateUserData()
+        }
 
         var isEnable = false
-        binding.editButton.setOnClickListener{
+        binding.editButton.setOnClickListener {
             isEnable = !isEnable
             binding.name.isEnabled = isEnable
             binding.address.isEnabled = isEnable
@@ -33,9 +49,72 @@ class AdminProfileActivity : AppCompatActivity() {
             binding.phone.isEnabled = isEnable
             binding.password.isEnabled = isEnable
 
-            if(isEnable){
+            if (isEnable) {
                 binding.name.requestFocus()
             }
+            binding.saveButton.isEnabled = isEnable
         }
+
+        retriveveAdminData()
+    }
+
+    private fun updateUserData() {
+        val updateName = binding.name.text.toString()
+        val updateAddress = binding.address.text.toString()
+        val updateEmail = binding.email.text.toString()
+        val updatePhone = binding.phone.text.toString()
+        val updatePassword = binding.password.text.toString()
+
+        val currentUserUid = auth.currentUser?.uid
+
+        if (currentUserUid != null) {
+            val userReference = database.getReference("user/$currentUserUid")
+            userReference.child("name").setValue(updateName)
+            userReference.child("address").setValue(updateAddress)
+            userReference.child("email").setValue(updateEmail)
+            userReference.child("phone").setValue(updatePhone)
+            userReference.child("password").setValue(updatePassword)
+
+            auth.currentUser?.updateEmail(updateEmail)
+            auth.currentUser?.updatePassword(updatePassword)
+        }
+    }
+
+    private fun retriveveAdminData() {
+        val currentUserUid = auth.currentUser?.uid
+
+        if (currentUserUid != null) {
+            val userReference = database.getReference("user/$currentUserUid")
+            userReference.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()){
+                        var ownerName = snapshot.child("name").getValue()
+                        var ownerEmail = snapshot.child("email").getValue()
+                        var ownerPassword = snapshot.child("password").getValue()
+                        var ownerAddress = snapshot.child("address").getValue()
+                        var ownerPhone = snapshot.child("phone").getValue()
+                        setDataToView(ownerName, ownerEmail, ownerPassword, ownerAddress, ownerPhone)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+        }
+    }
+
+    private fun setDataToView(
+        ownerName: Any?,
+        ownerEmail: Any?,
+        ownerPassword: Any?,
+        ownerAddress: Any?,
+        ownerPhone: Any?
+    ) {
+        binding.name.setText(ownerName.toString())
+        binding.email.setText(ownerEmail.toString())
+        binding.password.setText(ownerPassword.toString())
+        binding.address.setText(ownerAddress.toString())
+        binding.phone.setText(ownerPhone.toString())
     }
 }

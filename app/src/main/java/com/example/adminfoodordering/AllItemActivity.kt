@@ -2,6 +2,7 @@ package com.example.adminfoodordering
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.adminfoodordering.adapter.MenuItemAdapter
@@ -18,7 +19,6 @@ class AllItemActivity : AppCompatActivity() {
     private lateinit var databaseReference: DatabaseReference
     private lateinit var database: FirebaseDatabase
     private var menuItems: ArrayList<AllMenu> = ArrayList()
-
 
     private val binding: ActivityAllItemBinding by lazy {
         ActivityAllItemBinding.inflate(
@@ -62,8 +62,24 @@ class AllItemActivity : AppCompatActivity() {
     }
 
     private fun setAdapter() {
-        val adapter = MenuItemAdapter(this@AllItemActivity, menuItems, databaseReference)
+        val adapter = MenuItemAdapter(this@AllItemActivity, menuItems, databaseReference) {
+            position -> deleteMenuItems(position)
+        }
         binding.menuRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.menuRecyclerView.adapter = adapter
+    }
+
+    private fun deleteMenuItems(position: Int) {
+        val menuItemToDelete = menuItems[position]
+        val menuItemKey = menuItemToDelete.key
+        val foodMenuReference = database.reference.child("menu").child(menuItemKey!!)
+        foodMenuReference.removeValue().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                menuItems.removeAt(position)
+                Toast.makeText(this, "Xoa thanh cong", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Xoa that bai", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
