@@ -8,34 +8,41 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.adminfoodordering.databinding.DeliveryItemBinding
 
 class DeliveryAdapter(
-    private val customerNames: ArrayList<String>,
-    private val moneyStatus: ArrayList<String>,
-)
-    : RecyclerView.Adapter<DeliveryAdapter.DeliveryViewHolder>() {
+    private val customerNames: MutableList<String>,
+    private val moneyStatus: MutableList<Boolean>,
+) : RecyclerView.Adapter<DeliveryAdapter.DeliveryViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeliveryViewHolder {
-        val binding = DeliveryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            DeliveryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DeliveryViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: DeliveryViewHolder, position: Int) {
         holder.bind(position)
     }
+
     override fun getItemCount(): Int = customerNames.size
-    inner class DeliveryViewHolder(private val binding: DeliveryItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class DeliveryViewHolder(private val binding: DeliveryItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
             binding.apply {
                 customerName.text = customerNames[position]
-                statusMoney.text = moneyStatus[position]
+                if (moneyStatus[position] == true) {
+                    statusMoney.text = "Đã nhận đuợc hàng"
+                } else {
+                    statusMoney.text = "Chưa nhận được hàng"
+                }
 
                 val colorMap = mapOf(
-                    "Đã nhận đuợc hàng" to Color.GREEN,
-                    "Chưa nhận được hàng" to Color.RED,
-                    "Đang chờ nhận hàng" to Color.GRAY)
+                    true to Color.GREEN,
+                    false to Color.RED,
+                )
 
                 statusMoney.setTextColor(colorMap[moneyStatus[position]] ?: Color.BLACK)
-                statusColor.backgroundTintList = ColorStateList.valueOf(colorMap[moneyStatus[position]] ?: Color.BLACK)
+                statusColor.backgroundTintList =
+                    ColorStateList.valueOf(colorMap[moneyStatus[position]] ?: Color.BLACK)
             }
         }
     }

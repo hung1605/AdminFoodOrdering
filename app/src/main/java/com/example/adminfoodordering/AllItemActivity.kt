@@ -21,9 +21,7 @@ class AllItemActivity : AppCompatActivity() {
     private var menuItems: ArrayList<AllMenu> = ArrayList()
 
     private val binding: ActivityAllItemBinding by lazy {
-        ActivityAllItemBinding.inflate(
-            layoutInflater
-        )
+        ActivityAllItemBinding.inflate(layoutInflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,9 +60,10 @@ class AllItemActivity : AppCompatActivity() {
     }
 
     private fun setAdapter() {
-        val adapter = MenuItemAdapter(this@AllItemActivity, menuItems, databaseReference) {
-            position -> deleteMenuItems(position)
-        }
+        val adapter =
+            MenuItemAdapter(this@AllItemActivity, menuItems, databaseReference) { position ->
+                deleteMenuItems(position)
+            }
         binding.menuRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.menuRecyclerView.adapter = adapter
     }
