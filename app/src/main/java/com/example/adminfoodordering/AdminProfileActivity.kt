@@ -1,6 +1,7 @@
 package com.example.adminfoodordering
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.adminfoodordering.databinding.ActivityAdminProfileBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -26,7 +27,7 @@ class AdminProfileActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
-        adminReference = database.getReference("user")
+        adminReference = database.getReference("admin")
 
         binding.backButton.setOnClickListener { finish() }
 
@@ -36,11 +37,20 @@ class AdminProfileActivity : AppCompatActivity() {
         binding.phone.isEnabled = false
         binding.password.isEnabled = false
         binding.saveButton.isEnabled = false
-        binding.saveButton.setOnClickListener {
-            updateUserData()
-        }
 
         var isEnable = false
+
+        binding.saveButton.setOnClickListener {
+            updateUserData()
+            isEnable = !isEnable
+            binding.name.isEnabled = isEnable
+            binding.address.isEnabled = isEnable
+            binding.email.isEnabled = isEnable
+            binding.phone.isEnabled = isEnable
+            binding.password.isEnabled = isEnable
+        }
+
+
         binding.editButton.setOnClickListener {
             isEnable = !isEnable
             binding.name.isEnabled = isEnable
@@ -55,7 +65,7 @@ class AdminProfileActivity : AppCompatActivity() {
             binding.saveButton.isEnabled = isEnable
         }
 
-        retriveveAdminData()
+        retrieveAdminData()
     }
 
     private fun updateUserData() {
@@ -68,7 +78,7 @@ class AdminProfileActivity : AppCompatActivity() {
         val currentUserUid = auth.currentUser?.uid
 
         if (currentUserUid != null) {
-            val userReference = database.getReference("user/$currentUserUid")
+            val userReference = database.getReference("admin/$currentUserUid")
             userReference.child("name").setValue(updateName)
             userReference.child("address").setValue(updateAddress)
             userReference.child("email").setValue(updateEmail)
@@ -78,28 +88,26 @@ class AdminProfileActivity : AppCompatActivity() {
             auth.currentUser?.updateEmail(updateEmail)
             auth.currentUser?.updatePassword(updatePassword)
         }
+        Toast.makeText(this, "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show()
     }
 
-    private fun retriveveAdminData() {
+    private fun retrieveAdminData() {
         val currentUserUid = auth.currentUser?.uid
 
         if (currentUserUid != null) {
-            val userReference = database.getReference("user/$currentUserUid")
-            userReference.addListenerForSingleValueEvent(object : ValueEventListener {
+            val adminReference = database.getReference("admin/$currentUserUid")
+            adminReference.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.exists()){
-                        var ownerName = snapshot.child("name").getValue()
-                        var ownerEmail = snapshot.child("email").getValue()
-                        var ownerPassword = snapshot.child("password").getValue()
-                        var ownerAddress = snapshot.child("address").getValue()
-                        var ownerPhone = snapshot.child("phone").getValue()
+                        val ownerName = snapshot.child("name").value
+                        val ownerEmail = snapshot.child("email").value
+                        val ownerPassword = snapshot.child("password").value
+                        val ownerAddress = snapshot.child("address").value
+                        val ownerPhone = snapshot.child("phone").value
                         setDataToView(ownerName, ownerEmail, ownerPassword, ownerAddress, ownerPhone)
                     }
                 }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
+                override fun onCancelled(error: DatabaseError) {}
             })
         }
     }

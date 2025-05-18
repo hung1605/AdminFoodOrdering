@@ -86,7 +86,7 @@ class SignUpActivity : AppCompatActivity() {
         val user = UserModel(userName, nameOfRestaurant, email, password)
         val userId = FirebaseAuth.getInstance().currentUser!!.uid
         Log.d("Account", "lay id thanh cong")
-        database.child("user").child(userId).setValue(user)
+        database.child("admin").child(userId).setValue(user)
             .addOnSuccessListener {
                 Log.d("Account", "Lưu dữ liệu người dùng thành công!")
                 Toast.makeText(this, "Lưu thông tin thành công!", Toast.LENGTH_LONG).show()

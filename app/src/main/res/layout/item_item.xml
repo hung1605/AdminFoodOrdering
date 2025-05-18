@@ -71,48 +71,16 @@
                 app:layout_constraintStart_toEndOf="@+id/cardView9" />
 
             <ImageButton
-                android:id="@+id/minusButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_minus"
-                android:background="@android:color/transparent"
-                app:layout_constraintBottom_toBottomOf="@+id/quantityTextView"
-                app:layout_constraintEnd_toStartOf="@+id/quantityTextView"
-                app:layout_constraintTop_toTopOf="@+id/quantityTextView" />
-
-            <ImageButton
-                android:id="@+id/plusButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_plus"
-                android:background="@android:color/transparent"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/quantityTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/plusButton"
-                app:layout_constraintEnd_toStartOf="@+id/plusButton"
-                app:layout_constraintTop_toTopOf="@+id/plusButton" />
-
-            <ImageButton
                 android:id="@+id/deleteButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/trash"
-                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/plusButton"
-                app:layout_constraintStart_toStartOf="@+id/minusButton"
-                app:layout_constraintTop_toBottomOf="@+id/minusButton" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.907"
+                app:layout_constraintStart_toEndOf="@+id/cardView9"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

@@ -59,9 +59,9 @@ class PendingOrderActivity : AppCompatActivity(), PendingOrderAdapter.OnItemClic
 
     private fun addDataToListForRecyclerView() {
         for (orderItem in listOfOrderItem) {
-            orderItem?.userName?.let { listOfName.add(it) }
-            orderItem?.totalPrice?.let { listOfTotalPrice.add(it) }
-            orderItem?.foodImages?.filterNot { it.isEmpty() }?.forEach {
+            orderItem.userName?.let { listOfName.add(it) }
+            orderItem.totalPrice?.let { listOfTotalPrice.add(it) }
+            orderItem.foodImages?.filterNot { it.isEmpty() }?.forEach {
                 listOfImageFirstFoodOrder.add(it)
             }
         }

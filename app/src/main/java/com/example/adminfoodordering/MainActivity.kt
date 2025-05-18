@@ -2,6 +2,7 @@ package com.example.adminfoodordering
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.adminfoodordering.databinding.ActivityMainBinding
 import com.example.adminfoodordering.model.OrderDetails
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        auth = FirebaseAuth.getInstance()
         binding.addMenu.setOnClickListener {
             val intent = Intent(this, AddItemActivity::class.java)
             startActivity(intent)
@@ -50,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.logoutButton.setOnClickListener {
             auth.signOut()
+            Log.d("logout", "logout")
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
@@ -60,9 +63,16 @@ class MainActivity : AppCompatActivity() {
         wholeTimeEarning()
     }
 
+    override fun onResume() {
+        super.onResume()
+        pendingOrders()
+        completedOrders()
+        wholeTimeEarning()
+    }
+
     private fun wholeTimeEarning() {
-        var listOfTotalPay = mutableListOf<Int>()
-        completeOrderDatabaseReference = FirebaseDatabase.getInstance().reference.child("CompleteOrders")
+        val listOfTotalPay = mutableListOf<Int>()
+        completeOrderDatabaseReference = FirebaseDatabase.getInstance().reference.child("CompletedOrder")
         completeOrderDatabaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for(orderSnapshot in snapshot.children){
@@ -82,7 +92,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun completedOrders() {
-        val completedOrderReference = database.reference.child("CompleteOrders")
+        val completedOrderReference = database.reference.child("CompletedOrder")
         var completedOrderItemCount = 0
         completedOrderReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

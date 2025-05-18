@@ -101,7 +101,6 @@ class LoginActivity : AppCompatActivity() {
             val signIntent = googleSignInClient.signInIntent
             launcher.launch(signIntent)
         }
-
     }
 
     private fun createUserAccount(email: String, password: String) {
@@ -142,7 +141,7 @@ class LoginActivity : AppCompatActivity() {
         )
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         userId?.let {
-            database.child("user").child(it).setValue(userModel).addOnSuccessListener {
+            database.child("admin").child(it).setValue(userModel).addOnSuccessListener {
                 Log.d("Account", "Lưu dữ liệu người dùng thành công!")
                 updateUi()
             }
