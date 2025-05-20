@@ -209,7 +209,7 @@
                 android:id="@+id/imageView5"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="18dp"
                 android:src="@drawable/pluse_round"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -242,7 +242,7 @@
         app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/outForDeliveryButton"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -255,7 +255,7 @@
                 android:id="@+id/imageView6"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="18dp"
                 android:src="@drawable/log_out"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -282,25 +282,26 @@
         android:id="@+id/outForDeliveryButton"
         android:layout_width="150dp"
         android:layout_height="100dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="60dp"
         android:outlineSpotShadowColor="@color/textColor"
         app:cardCornerRadius="15dp"
-        app:layout_constraintEnd_toStartOf="@+id/cardView2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView4">
+        app:layout_constraintStart_toEndOf="@+id/cardView4"
+        app:layout_constraintTop_toTopOf="@+id/cardView4">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/chargereen">
+            android:background="@drawable/chargereen"
+            app:layout_constraintEnd_toEndOf="@+id/cardView4"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/profile">
 
             <ImageView
                 android:id="@+id/imageView7"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="18dp"
                 android:src="@drawable/shopping_bag"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -323,74 +324,31 @@
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView7"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:outlineSpotShadowColor="@color/textColor"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cardView4"
-        app:layout_constraintTop_toTopOf="@+id/cardView4">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/createNewUser"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/chargereen">
-
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/user_plus"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/patrick_hand"
-                android:text="Thêm người dùng"
-                android:textColor="@color/textColor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView8" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView4"
         android:layout_width="150dp"
         android:layout_height="100dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="60dp"
         android:outlineSpotShadowColor="@color/textColor"
         app:cardCornerRadius="15dp"
-        app:layout_constraintEnd_toStartOf="@+id/cardView7"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintStart_toStartOf="@+id/cardView3"
         app:layout_constraintTop_toBottomOf="@+id/cardView3">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/profile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/chargereen">
+            android:background="@drawable/chargereen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
                 android:id="@+id/imageView9"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="18dp"
                 android:src="@drawable/user"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -403,7 +361,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/patrick_hand"
                 android:gravity="center"
-                android:text="Thông tin\ncá nhân"
+                android:text="Thông tin cá nhân"
                 android:textColor="@color/textColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -435,7 +393,7 @@
                 android:id="@+id/imageView10"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="18dp"
                 android:src="@drawable/eye"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

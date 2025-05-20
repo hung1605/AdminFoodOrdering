@@ -164,7 +164,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun onAdminLoginSuccess() {
-        // ...
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (!task.isSuccessful) {
                 Log.w("AdminLogin", "Fetching FCM token failed for admin", task.exception)

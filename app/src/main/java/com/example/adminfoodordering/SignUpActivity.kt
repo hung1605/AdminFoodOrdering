@@ -8,11 +8,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.adminfoodordering.databinding.ActivitySignUpBinding
 import com.example.adminfoodordering.model.UserModel
+import com.example.foodordering.adminapp.Service.MyAdminFirebaseMessagingService
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.database
+import com.google.firebase.messaging.FirebaseMessaging
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -90,6 +92,7 @@ class SignUpActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 Log.d("Account", "Lưu dữ liệu người dùng thành công!")
                 Toast.makeText(this, "Lưu thông tin thành công!", Toast.LENGTH_LONG).show()
+                onAdminLoginSuccess()
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
             }
@@ -97,5 +100,17 @@ class SignUpActivity : AppCompatActivity() {
                 Log.e("Account", "Lỗi khi lưu dữ liệu người dùng: ${e.message}", e)
                 Toast.makeText(this, "Lỗi khi lưu dữ liệu: ${e.message}", Toast.LENGTH_LONG).show()
             }
+    }
+
+    private fun onAdminLoginSuccess() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("AdminLogin", "Fetching FCM token failed for admin", task.exception)
+                return@addOnCompleteListener
+            }
+            val token = task.result
+            Log.d("AdminLogin", "Current FCM Token for admin: $token")
+            MyAdminFirebaseMessagingService.sendAdminFCMTokenToDatabase(token)
+        }
     }
 }
