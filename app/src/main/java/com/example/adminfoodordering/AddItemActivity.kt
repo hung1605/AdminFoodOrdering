@@ -2,6 +2,7 @@ package com.example.adminfoodordering
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -96,6 +97,7 @@ class AddItemActivity : AppCompatActivity() {
 
     private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         if (uri != null) {
+            Log.d("anhtrendienthoai", "dfajlksjflsa" + uri.toString())
             binding.selectedImage.setImageURI(uri)
             foodImageUri = uri
         }

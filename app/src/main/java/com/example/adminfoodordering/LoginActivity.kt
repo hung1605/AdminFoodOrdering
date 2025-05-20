@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.ActivityChooserView
 import com.example.adminfoodordering.databinding.ActivityLoginBinding
 import com.example.adminfoodordering.model.UserModel
+import com.example.foodordering.adminapp.Service.MyAdminFirebaseMessagingService
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -22,6 +23,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.database
+import com.google.firebase.messaging.FirebaseMessaging
 
 class LoginActivity : AppCompatActivity() {
     private var userName: String? = null
@@ -50,6 +52,7 @@ class LoginActivity : AppCompatActivity() {
                                 "Đăng nhập thành công bằng Google",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            onAdminLoginSuccess()
                             updateUi()
                             finish()
                         } else {
@@ -107,6 +110,7 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val user = auth.currentUser
+                onAdminLoginSuccess()
                 updateUi()
                 Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show()
             } else {
@@ -143,6 +147,7 @@ class LoginActivity : AppCompatActivity() {
         userId?.let {
             database.child("admin").child(it).setValue(userModel).addOnSuccessListener {
                 Log.d("Account", "Lưu dữ liệu người dùng thành công!")
+                onAdminLoginSuccess()
                 updateUi()
             }
 
@@ -153,8 +158,21 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+            onAdminLoginSuccess()
+            updateUi()
+        }
+    }
+
+    private fun onAdminLoginSuccess() {
+        // ...
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("AdminLogin", "Fetching FCM token failed for admin", task.exception)
+                return@addOnCompleteListener
+            }
+            val token = task.result
+            Log.d("AdminLogin", "Current FCM Token for admin: $token")
+            MyAdminFirebaseMessagingService.sendAdminFCMTokenToDatabase(token)
         }
     }
 
