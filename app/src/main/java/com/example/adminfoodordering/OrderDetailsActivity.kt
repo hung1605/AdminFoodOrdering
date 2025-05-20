@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.adminfoodordering.adapter.OrderDetailsAdapter
 import com.example.adminfoodordering.databinding.ActivityOrderDetailsBinding
-import com.example.adminfoodordering.model.OrderDetails
+import com.example.foodordering.Model.OrderDetails
 
 
 class OrderDetailsActivity : AppCompatActivity() {

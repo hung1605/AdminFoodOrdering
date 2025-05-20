@@ -5,19 +5,21 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat // Để dùng màu
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.adminfoodordering.R // Đảm bảo R của admin app
 import com.example.adminfoodordering.databinding.PendingOrderItemBinding
-import com.example.adminfoodordering.model.OrderDetails // Import OrderDetails
+import com.example.foodordering.Model.OrderDetails
 
 class PendingOrderAdapter(
     private val context: Context,
-    private val orderItems: List<OrderDetails>, // Thay đổi thành List<OrderDetails>
+    private val orderItems: List<OrderDetails>,
     private val itemClicked: OnItemClicked
 ) : RecyclerView.Adapter<PendingOrderAdapter.PendingOrderViewHolder>() {
 
     interface OnItemClicked {
-        fun onItemAcceptClickListener(position: Int) // Đổi tên cho rõ ràng
+        fun onItemAcceptClickListener(position: Int)
         fun onItemClickListener(position: Int)
         fun onItemDispatchClickListener(position: Int)
     }
@@ -30,7 +32,7 @@ class PendingOrderAdapter(
 
     override fun onBindViewHolder(holder: PendingOrderViewHolder, position: Int) {
         val currentOrderItem = orderItems[position]
-        holder.bind(currentOrderItem, position) // Truyền cả đối tượng OrderDetails
+        holder.bind(currentOrderItem, position)
     }
 
     override fun getItemCount(): Int = orderItems.size
@@ -38,44 +40,43 @@ class PendingOrderAdapter(
     inner class PendingOrderViewHolder(private val binding: PendingOrderItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        // Không cần biến isAccepted ở đây nữa
-
-        fun bind(orderItem: OrderDetails, position: Int) { // Nhận OrderDetails
+        fun bind(orderItem: OrderDetails, position: Int) {
             binding.apply {
                 customerName.text = orderItem.userName ?: "N/A"
-                // Giả sử quantity ở đây bạn muốn hiển thị tổng tiền
-                pendingOrderQuantity.text = orderItem.totalPrice ?: "0đ"
+                pendingOrderQuantity.text = orderItem.totalPrice ?: "0đ" // Giả sử đây là tổng tiền
 
-                // Lấy ảnh đầu tiên từ danh sách ảnh (nếu có)
                 val imageUrl = orderItem.foodImages?.firstOrNull { it.isNotEmpty() }
                 if (imageUrl != null) {
-                    val uri = Uri.parse(imageUrl)
-                    Glide.with(context).load(uri).into(orderFoodImage)
+                    Glide.with(context).load(Uri.parse(imageUrl)).into(orderFoodImage)
                 } else {
-                    // Đặt ảnh placeholder nếu không có ảnh
-                    // orderFoodImage.setImageResource(R.drawable.placeholder_image)
+                    // orderFoodImage.setImageResource(R.drawable.default_image) // Ảnh mặc định
                 }
 
-                // Quyết định văn bản và hành động của nút dựa trên orderItem.orderAccepted
-                if (orderItem.orderAccepted) {
-                    orderAcceptButton.text = "Gửi"
-                } else {
+                // Quyết định văn bản và trạng thái của nút
+                if (!orderItem.orderAccepted) {
                     orderAcceptButton.text = "Chấp nhận"
+                    orderAcceptButton.isEnabled = true
+                    // orderAcceptButton.setBackgroundColor(ContextCompat.getColor(context, R.color.green_color)) // Ví dụ màu
+                } else if (orderItem.orderAccepted && !orderItem.orderDispatched) {
+                    orderAcceptButton.text = "Gửi"
+                    orderAcceptButton.isEnabled = true
+                    // orderAcceptButton.setBackgroundColor(ContextCompat.getColor(context, R.color.blue_color)) // Ví dụ màu
+                } else { // orderAccepted && orderDispatched
+                    orderAcceptButton.text = "Đã gửi"
+                    orderAcceptButton.isEnabled = false // Vô hiệu hóa sau khi đã gửi
+                    // orderAcceptButton.setBackgroundColor(ContextCompat.getColor(context, R.color.grey_color)) // Ví dụ màu
                 }
 
                 orderAcceptButton.setOnClickListener {
-                    val currentPosition = adapterPosition // Luôn dùng adapterPosition trong listener
+                    val currentPosition = adapterPosition
                     if (currentPosition != RecyclerView.NO_POSITION) {
-                        val clickedOrderItem = orderItems[currentPosition] // Lấy lại item mới nhất
+                        val clickedOrderItem = orderItems[currentPosition]
                         if (!clickedOrderItem.orderAccepted) {
-                            // Nút đang là "Chấp nhận", gọi hành động chấp nhận
                             itemClicked.onItemAcceptClickListener(currentPosition)
-                            // Không thay đổi text ở đây, Activity sẽ cập nhật data và notify adapter
-                        } else {
-                            // Nút đang là "Gửi", gọi hành động gửi đi
+                        } else if (clickedOrderItem.orderAccepted && !clickedOrderItem.orderDispatched) {
                             itemClicked.onItemDispatchClickListener(currentPosition)
-                            // Việc xóa item khỏi list và cập nhật UI sẽ do Activity xử lý
                         }
+                        // Không làm gì nếu đã gửi
                     }
                 }
 
@@ -87,6 +88,5 @@ class PendingOrderAdapter(
                 }
             }
         }
-        // Hàm showToast không còn cần thiết ở đây nếu Activity xử lý Toast
     }
 }

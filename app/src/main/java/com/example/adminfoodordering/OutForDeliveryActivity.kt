@@ -5,7 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.adminfoodordering.adapter.DeliveryAdapter
 import com.example.adminfoodordering.databinding.ActivityOutForDeliveryBinding
-import com.example.adminfoodordering.model.OrderDetails
+import com.example.foodordering.Model.OrderDetails
+
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
